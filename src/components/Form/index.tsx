@@ -88,9 +88,9 @@ export function Form() {
             />
          )}
          {activeQuestion >= questions.length && (
-            <div>
-               <h1 className="text-xl font-bold">Thank you for answering</h1>
-               <p>Likely your menopause age will be <b>{result}</b></p>
+            <div className="flex flex-col min-h-[50vh]]">
+               <p >Based on your responses, it is estimated that your may experience menopause around the age of <b>{result}</b></p>
+               <p className="mt-2 text-sm text-gray-500">Disclaimer: The abovementioned age is purely an estimate, always seek medical advice prior to any medications</p>
             </div>
          )}
       </div>
