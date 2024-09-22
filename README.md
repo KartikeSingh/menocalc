@@ -1,50 +1,16 @@
-# React + TypeScript + Vite
+# MenoKalc
+MenoCalc a tool designed to help women predict when they are likely to experience menopause.
+By gathering key personal information—such as menstrual history, family background, and lifestyle factors—the app provides a tailored estimate of when menopause might occur.
+MenoCalc empowers women with knowledge about this significant life transition, helping them feel more prepared and allowing them to take early steps in planning and managing their health. While it doesn't offer medical advice or recommendations.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### How do we do this?
+MenoCalc is based on a heuristic model that uses several personal factors to estimate the likely age of menopause. These factors include:
 
-Currently, two official plugins are available:
+![example.png](./public/q1.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+•⁠  *⁠*Family History**: If a user's mother or sister experienced menopause early or late, it can influence the estimate.
+•⁠  *⁠*Menstrual History**: Irregular cycles or early menarche (first period) can indicate the timing of menopause.
+•⁠  *⁠*Lifestyle Factors**: Exercise, BMI, and overall health impact menopause timing.
+•⁠  *⁠*Health Conditions**: Conditions like diabetes or other chronic illnesses can affect when menopause begins.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+The app uses these inputs to adjust the average menopause age of around 50 years by adding or subtracting years based on the user's specific data. For example, an early onset in family history may lower the estimated age, while a healthy lifestyle may push it later. The result is a personalized prediction to help users understand when they may experience menopause.
