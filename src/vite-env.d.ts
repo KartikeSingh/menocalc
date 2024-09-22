@@ -3,7 +3,7 @@
 interface Question {
   index: number;
   value: string | number;
-  selected: number;
+  selected: number[];
   question: string;
   type: number;
   options?: undefined;

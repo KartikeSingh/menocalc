@@ -19,15 +19,14 @@ export const DEAFULT_QUESTIONS = [
       "Other",
     ],
     calculateChange: (v: any) => {
-      switch (v) {
+      switch (v[0]) {
         case 0:
           return 0;
         case 1:
-          return 0.5;
+          case 3:
+            return 0.5;
         case 2:
           return 0.3;
-        case 3:
-          return 0.5;
         case 4:
           return 0.2;
         default:
@@ -42,7 +41,7 @@ export const DEAFULT_QUESTIONS = [
       "Yes",
       "No",
     ],
-    calculateChange: (v: any) => v === 0 ? 3 : 0,
+    calculateChange: (v: any) => v[0] === 0 ? -3 : 0,
   },
   {
     question: "What is your exercise schedule?",
@@ -55,7 +54,7 @@ export const DEAFULT_QUESTIONS = [
       "Everyday",
     ],
     calculateChange: (v: any) => {
-      switch (v) {
+      switch (v[0]) {
         case 0:
           return -0.2;
         case 1:
@@ -79,7 +78,7 @@ export const DEAFULT_QUESTIONS = [
       "High",
     ],
     calculateChange: (v: any) => {
-      switch (v) {
+      switch (v[0]) {
         case 0:
           return -1.5;
         case 1:
@@ -107,7 +106,7 @@ export const DEAFULT_QUESTIONS = [
       "Yes",
       "No",
     ],
-    calculateChange: (v: any) => v === 0 ? -1 : 0,
+    calculateChange: (v: any) => v[0] === 0 ? -1 : 0,
   },
   {
     question: "Have you ever been pregnant?",
@@ -116,7 +115,7 @@ export const DEAFULT_QUESTIONS = [
       "Yes",
       "No",
     ],
-    calculateChange: (v: any) => v === 0 ? 1 : 0,
+    calculateChange: (v: any) => v[0] === 0 ? 1 : 0,
   },
   {
     question: "You have ever used OCP?",
@@ -127,13 +126,12 @@ export const DEAFULT_QUESTIONS = [
       "No",
     ],
     calculateChange: (v: any) => {
-      switch (v) {
+      switch (v[0]) {
         case 0:
           return 0.5;
         case 1:
           return 0.2;
         case 2:
-          return 0;
         default:
           return 0;
       }
@@ -144,7 +142,7 @@ export const DEAFULT_QUESTIONS = [
     type: 1,
     isBmi: true,
     calculateChange: (v: any) => {
-      if (v <= 18.5) return -1;
+      if (v <= 18.5) return 1;
       else if (v >= 30) return -0.5;
       else return 0;
     }
@@ -158,7 +156,7 @@ export const DEAFULT_QUESTIONS = [
       "Healthy",
     ],
     calculateChange: (v: any) => {
-      switch (v) {
+      switch (v[0]) {
         case 0:
           return 1;
         case 1:
@@ -172,42 +170,59 @@ export const DEAFULT_QUESTIONS = [
   },
   {
     question: "Are you experincing any symptoms?",
-    type: 2,
+    type: 3,
     options: [
       "Hot Flashes",
       "Night Sweats",
       "Mood Swings",
       "Sleep Disturbance",
       "None",
-      "Many/All of above"
     ],
     calculateChange: (v: any) => {
-      if ([0, 1].includes(v)) return -1;
-      if ([2, 3].includes(v)) return -0.5;
-      if (v === 5) return -1.3;
+      let res = 0;
 
-      return 0;
+      for (let i = 0; i < v.length; i++) {
+        if ([0, 1].includes(v[i])) res += -1;
+        if ([2, 3].includes(v[i])) res += -0.5;
+        if (v[i] === 5) res += -1.3;
+      }
+
+      return res;
     }
   },
   {
     question: "Do you have any chronic health conditions?",
-    type: 2,
+    type: 3,
     options: [
       "Diabetes",
       "Thyroid",
       "Heart Disease",
+      "None"
     ],
     calculateChange: (v: any) => {
-      switch (v) {
-        case 0:
-          return -1;
-        case 1:
-          return -0.5;
-        case 2:
-          return -1;
-        default:
-          return 0;
+      let res = 0;
+
+      for (let i = 0; i < v.length; i++) {
+        switch (v[i]) {
+          case 0:
+            res += -1;
+            break;
+
+          case 1:
+            res += -0.5;
+            break;
+
+          case 2:
+            res += -1;
+            break;
+
+          default:
+            res += 0;
+            break;
+        }
       }
+
+      return res;
     }
   },
 ];

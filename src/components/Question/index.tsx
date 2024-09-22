@@ -6,12 +6,12 @@ interface QuestionProps {
    options?: string[];
    answerType: number;
    id: string;
-   onNext: (value: number | string) => void;
+   onNext: (value: number | string | number[]) => void;
    onPrevious: () => void;
    isLast?: boolean;
    index: number;
    defaultValue?: string;
-   defaultSelected?: number;
+   defaultSelected?: number[];
 }
 
 export function Question({
@@ -27,12 +27,10 @@ export function Question({
    defaultValue,
 }: QuestionProps) {
    const [selected, setSelected] = useState(
-      typeof defaultSelected !== "number" || isNaN(defaultSelected)
-         ? -1
-         : defaultSelected
+      Array.isArray(defaultSelected) ? defaultSelected : []
    );
    const [value, setValue] = useState(defaultValue || "");
-console.log(question)
+
    return (
       <div
          key={id}
@@ -46,10 +44,15 @@ console.log(question)
          <div className="flex gap-x-2 gap-y-1 flex-wrap my-3">
             {options?.map((option, i) => (
                <p
-                  onClick={() => setSelected(i)}
-                  className={`border-2 w-fit px-2 py-0.5 my-1 rounded-sm cursor-pointer ${
-                     selected === i ? "bg-gray-300" : ""
-                  }`}
+                  onClick={() => {
+                     if (answerType === 2) setSelected([i]);
+                     else {
+                        if (selected.includes(i)) setSelected(selected.filter((v) => v !== i));
+                        else setSelected([...new Set([...selected, i])]);
+                     }
+                  }}
+                  className={`border-2 w-fit px-2 py-0.5 my-1 rounded-sm cursor-pointer ${selected.includes(i) ? "bg-gray-300" : ""
+                     }`}
                >
                   {option}
                </p>
@@ -68,8 +71,8 @@ console.log(question)
                <FormButton onClick={() => onPrevious()} text={"Previous"} />
             )}
             <FormButton
-               onClick={() => onNext(answerType === 2 ? selected : value)}
-               text={isLast ? "End" : "Next"}
+               onClick={() => onNext([2,3].includes(answerType)? selected : value)}
+               text={isLast ? "Submit" : "Next"}
             />
          </div>
       </div>

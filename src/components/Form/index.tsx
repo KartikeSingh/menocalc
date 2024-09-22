@@ -9,7 +9,7 @@ export function Form() {
             ...v,
             index: i,
             value: "",
-            selected: -1,
+            selected: [],
             isBmi: v.isBmi,
          };
       }) as Question[]
@@ -29,7 +29,7 @@ export function Form() {
                .map(
                   (v, i) =>
                      v.calculateChange(
-                        v.type === 2
+                        [2, 3].includes(v.type)
                            ? questions[i].selected
                            : questions[i].value
                      ) as number
@@ -39,7 +39,7 @@ export function Form() {
    }, [activeQuestion]);
 
    return (
-      <div>
+      <div className="mx-auto w-fit">
          {activeQuestion <= questions.length - 1 && (
             <Question
                // {...questions[activeQuestion]}
@@ -50,14 +50,15 @@ export function Form() {
                onNext={(value) => {
                   if (question.type === 1) {
                      if (!value) return alert("Please enter a value!");
+                     if (isNaN(parseInt(value + ""))) return alert("Invalid input!");
 
                      question.value = parseInt(value + "") || 0;
-                  } else if (question.type === 2) {
-                     if (value === -1) return alert("Please select an option!");
+                  } else if (question.type === 2 || question.type === 3) {
+                     if (!Array.isArray(value) || value.length === 0 || value.every(v => v === -1)) return alert("Please select an option!");
 
-                     question.selected = value as number;
+                     question.selected = value as number[];
                   } else {
-                     if (!value) return alert("Please enter a value!");
+                     if (!value || Array.isArray(value)) return alert("Please enter a value!");
 
                      question.value = value;
                   }
