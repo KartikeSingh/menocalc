@@ -1,10 +1,10 @@
 # MenoKalc
-MenoCalc a tool designed to help women predict when they are likely to experience menopause.
+MenoKalc a tool designed to help women predict when they are likely to experience menopause.
 By gathering key personal information—such as menstrual history, family background, and lifestyle factors—the app provides a tailored estimate of when menopause might occur.
-MenoCalc empowers women with knowledge about this significant life transition, helping them feel more prepared and allowing them to take early steps in planning and managing their health. While it doesn't offer medical advice or recommendations.
+MenoKalc empowers women with knowledge about this significant life transition, helping them feel more prepared and allowing them to take early steps in planning and managing their health. While it doesn't offer medical advice or recommendations.
 
 ### How do we do this?
-MenoCalc is based on a heuristic model that uses several personal factors to estimate the likely age of menopause. These factors include:
+MenoKalc is based on a heuristic model that uses several personal factors to estimate the likely age of menopause. These factors include:
 
 ![example.png](./public/q1.png)
 
